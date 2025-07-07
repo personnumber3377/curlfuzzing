@@ -1,0 +1,2 @@
+aaaa-=^..^=-aaaa
+ldap://127.0.0.1:8888/ou=users,dc=example,dc=com

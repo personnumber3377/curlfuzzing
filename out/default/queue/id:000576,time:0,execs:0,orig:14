@@ -1,0 +1,14 @@
+HTTP/1.1 200 OK
+Varythorization,Accefer-Encoding: chunked
+Etag: "26d3092a9c583c900af5b63f216f"
+Clication/vnd.bonfire+xml; charset=utDate: Wen 2011 1ET,POST,OPTIONS,HEAD
+Cache-Control: publax-age=30
+Connection: close
+
+<?xml version="1.0" encs="hnfire-project.eu/doc/schemas/occi" href="/experies">
+  <s offset="0" total="0">
+  </items>
+  <link href="/exs/33el="parent" type="application/vnd.bonfire+xml"/>
+</collen>
+
+

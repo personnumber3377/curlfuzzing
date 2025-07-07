@@ -1,0 +1,63 @@
+You can definitely use that code as a template to test libcurl with a SOCKS5 proxy, and even as the base for a fuzzing harness.
+
+Let’s break it down:
+
+✅ 1. Minimal working program using SOCKS5 proxy
+Here’s a slightly improved version of your snippet, with error checking:
+
+c
+Kopioi
+Muokkaa
+#include <curl/curl.h>
+#include <stdio.h>
+
+int main(void) {
+    CURL *curl = curl_easy_init();
+    if (curl) {
+        CURLcode ret;
+
+        curl_easy_setopt(curl, CURLOPT_URL, "https://example.com/");
+        curl_easy_setopt(curl, CURLOPT_PROXY, "socks5h://127.0.0.1:1080"); // or "localhost"
+        curl_easy_setopt(curl, CURLOPT_PROXYTYPE, CURLPROXY_SOCKS5); // optional, auto-detected from scheme
+
+        // Avoid downloading body
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, NULL);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, stdout);
+
+        ret = curl_easy_perform(curl);
+        if (ret != CURLE_OK)
+            fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(ret));
+
+        curl_easy_cleanup(curl);
+    }
+    return 0;
+}
+🛠 2. How to compile it
+You need to link against libcurl. Use pkg-config to get the right compiler flags:
+
+bash
+Kopioi
+Muokkaa
+gcc socks_test.c -o socks_test $(pkg-config --cflags --libs libcurl)
+If pkg-config isn't installed or doesn't work, try this manually:
+
+bash
+Kopioi
+Muokkaa
+gcc socks_test.c -o socks_test -lcurl
+⚠️ Make sure you have libcurl and its development headers installed (libcurl4-openssl-dev on Ubuntu/Debian).
+
+🚀 3. Run the program
+bash
+Kopioi
+Muokkaa
+./socks_test
+This will attempt to connect to example.com via a SOCKS5 proxy at 127.0.0.1:1080.
+
+If there's no proxy listening there, you’ll get an error like:
+curl_easy_perform() failed: Failed to connect to 127.0.0.1 port 1080: Connection refused
+
+🔍 Optional: Use with a fake SOCKS server
+To fuzz libcurl/socks.c, you'd replace 127.0.0.1:1080 with your fake SOCKS5 server (which feeds malformed data), and compile your fuzzer using the same libcurl logic.
+
+

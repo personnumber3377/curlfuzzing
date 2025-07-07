@@ -1,0 +1,7 @@
+https://chatgpt.com/c/6867d295-ec0c-8008-8621-9518067794b7
+https://github.com/curl/curl-fuzzer/issues/79
+https://curl.se/libcurl/c/CURLOPT_PROXYTYPE.html
+
+https://github.com/fkie-cad/libdesock
+
+

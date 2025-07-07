@@ -1,0 +1,7 @@
+# environment variables:
+AFL_CUSTOM_INFO_PROGRAM=./ldap_fuzzer
+AFL_CUSTOM_INFO_PROGRAM_ARGV=
+AFL_CUSTOM_INFO_OUT=ldap_out/default
+AFL_PRELOAD=libdesock.so
+# command line:
+'afl-fuzz' '-x' 'dictionary.dict' '-t' '300' '-i' 'ldap_in' '-o' 'ldap_out' '--' './ldap_fuzzer'

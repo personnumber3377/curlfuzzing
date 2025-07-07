@@ -1,0 +1,7 @@
+# environment variables:
+AFL_CUSTOM_INFO_PROGRAM=./sample_code
+AFL_CUSTOM_INFO_PROGRAM_ARGV=
+AFL_CUSTOM_INFO_OUT=no_custom/default
+AFL_PRELOAD=libdesock.so
+# command line:
+'afl-fuzz' '-x' 'dictionary.dict' '-t' '300' '-i' '-' '-o' 'no_custom' '--' './sample_code'
